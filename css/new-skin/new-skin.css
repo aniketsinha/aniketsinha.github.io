@@ -1361,3 +1361,11 @@ input[type="file"] {
 .grid-items {
 	min-height: 1px;
 }
+
+.ht350 {
+	height: 350px;
+}
+
+.no-show {
+	display: none;
+}

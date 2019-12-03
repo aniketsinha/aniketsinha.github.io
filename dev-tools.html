@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!--
+        Basic
+    -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dev Tools - Aniket Sinha</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <!--
+        Load Fonts
+    -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css">
+
+    <!--
+        Load CSS
+    -->
+    <link rel="stylesheet" href="css/basic.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/blogs.css" />
+    <link rel="stylesheet" href="css/ionicons.css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/owl.carousel.css" />
+
+    <!--
+        Background Gradient
+    -->
+    <link rel="stylesheet" href="css/gradient.css" />
+
+    <!--
+        Template New-Skin
+    -->
+    <link rel="stylesheet" href="css/new-skin/new-skin.css" />
+
+    <!--
+        Template RTL
+    -->
+    <!--<link rel="stylesheet" href="css/rtl.css" />-->
+
+    <!--
+        Template Colors
+    -->
+    <link rel="stylesheet" href="css/new-skin/template-colors/green.css" />
+    <!--    <link rel="stylesheet" href="css/template-colors/blue.css" />-->
+
+
+    <!--
+        Template Dark
+    -->
+    <!--<link rel="stylesheet" href="css/template-dark/dark.css" />-->
+
+
+    <!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!--
+        Favicons
+    -->
+    <link rel="shortcut icon" href="images/favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="images/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
+<!--    <link rel="manifest" href="images/favicons/manifest.json">-->
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="images/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+</head>
+
+<body>
+<div class="page new-skin">
+
+
+    <!-- background -->
+    <div class="background gradient">
+        <ul class="bg-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <!--
+        Container
+    -->
+    <div class="container opened" data-animation-in="fadeInLeft" data-animation-out="fadeOutLeft">
+        <header class="header">
+            <div class="top-menu">
+                <ul>
+                    <li class="active">
+                        <a href="#unescape-card">
+                            <span class="icon ion-quote"></span>
+                            <span class="link">Unescape string</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#escape-card">
+                            <span class="icon ion-quote"></span>
+                            <span class="link">Escape string</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#prettify-card">
+                            <span class="icon ion-code"></span>
+                            <span class="link">Prettify JSON</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </header>
+        <div class="card-started" id="home-card">
+            <div class="profile no-photo">
+                <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                    <div class="text-box">
+                        <textarea rows="200" cols="200" class="ht350" id="ta-input">{"a":1, "b":true, "c":null}</textarea>
+                        <br><button onclick="go()">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-inner animated active" id="unescape-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">Unescape String</div>
+                    <div class="row">
+                        <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p>
+                                    <button class="no-show" onclick="copyUnescapedString()" id="btn-copy-unescaped"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <br>
+                                    <textarea rows="200" cols="200" class="ht350" id="unescape-output"></textarea>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card-inner animated" id="escape-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">Escape String</div>
+                    <div class="row">
+                        <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p>
+                                    <button class="no-show" onclick="copyEscapedString()" id="btn-copy-escaped"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <br>
+                                    <textarea rows="200" cols="200" class="ht350" id="escape-output">escape Output</textarea>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-inner animated" id="prettify-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">Prettify JSON</div>
+                    <div class="row">
+                        <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p>
+                                    <button class="no-show" onclick="copyPrettyJson()" id="btn-copy-pretty-json"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="json-prettify-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+<!--        <textarea name="textarea-no-show" id="ta-no-show" cols="0" rows="0" style="position:absolute; left: -100%"></textarea>-->
+
+
+    </div>
+
+
+</div>
+
+<!--
+    jQuery Scripts
+-->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.validate.js"></script>
+<script src="js/jquery.magnific-popup.js"></script>
+<script src="js/imagesloaded.pkgd.js"></script>
+<script src="js/isotope.pkgd.js"></script>
+<script src="js/jquery.slimscroll.js"></script>
+<script src="js/owl.carousel.js"></script>
+
+
+<script src="js/script.js"></script>
+<script src="js/dev-tools.js"></script>
+
+</body>
+</html>
