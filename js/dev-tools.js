@@ -3,19 +3,28 @@ const taUnescapeId = "unescape-output";
 const taEscapeId = "escape-output";
 
 const prettyJsonOutputElementId = "json-prettify-output";
+const encodedOutputElementId = "encoded-output";
+const decodedOutputElementId = "decoded-output";
+
 
 const buttonCopyEscaped = "btn-copy-escaped";
 const buttonCopyUnescaped = "btn-copy-unescaped";
 const buttonCopyPrettyJson = "btn-copy-pretty-json";
+const buttonCopyEncoded = "btn-copy-encoded";
+const buttonCopyDecoded = "btn-copy-decoded";
 
 const taInput = document.getElementById(taInputId);
 const taEscapeEl = document.getElementById(taEscapeId);
 const taUnescapeEl = document.getElementById(taUnescapeId);
 const prettyJsonOutputElement = document.getElementById(prettyJsonOutputElementId);
+const encodedOutputElement = document.getElementById(encodedOutputElementId);
+const decodedOutputElement = document.getElementById(decodedOutputElementId);
 
 const buttonCopyEscapedEl = document.getElementById(buttonCopyEscaped);
 const buttonCopyUnescapedEl = document.getElementById(buttonCopyUnescaped);
 const buttonCopyPrettyJsonEl = document.getElementById(buttonCopyPrettyJson);
+const buttonCopyEncodedEl = document.getElementById(buttonCopyEncoded);
+const buttonCopyDecodedEl = document.getElementById(buttonCopyDecoded);
 
 
 function escapeString(taText) {
@@ -44,6 +53,13 @@ function stringifyJson(jsonString) {
     return parsedCorrectly;
 }
 
+function base64EncodeString(toEncode) {
+    return btoa(toEncode);
+}
+function base64DecodeString(toDecode) {
+    return atob(toDecode);
+}
+
 function escapeInput(taText) {
       let escapedText = escapeString(taText);
       setTaContent(taEscapeEl, escapedText);
@@ -67,12 +83,26 @@ function prettifyInput(taText) {
     }
 }
 
+function base64EncodeInput(taText) {
+    let encodedStr = base64EncodeString(taText);
+    encodedOutputElement.innerHTML = encodedStr;
+    showHideElement(true, buttonCopyEncodedEl)
+}
+
+function base64DecodeInput(taText) {
+    let decodedStr = base64DecodeString(taText);
+    decodedOutputElement.innerHTML = decodedStr;
+    showHideElement(true, buttonCopyDecodedEl)
+}
+
 function go() {
     if(taInput) {
         let taText = taInput.value;
         escapeInput(taText);
         unescapeInput(taText);
         prettifyInput(taText);
+        base64EncodeInput(taText);
+        base64DecodeInput(taText);
     }
 }
 
@@ -107,6 +137,16 @@ function copyPrettyJson() {
     executeCopy();
 }
 
+
+function copyEncoded() {
+    selectElementContents(encodedOutputElement);
+    executeCopy();
+}
+
+function copyDecoded() {
+    selectElementContents(decodedOutputElement);
+    executeCopy();
+}
 
 // helper for select and copy
 function executeCopy(el) {
