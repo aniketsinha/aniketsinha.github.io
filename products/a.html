@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products - Aniket Sinha</title>
+</head>
+<body>
+<a target="_blank" href="https://www.amazon.in?&_encoding=UTF8&tag=prahtml-21&linkCode=ur2&linkId=25491fd7e38ac256b40938cccd3e3355&camp=3638&creative=24630">Amazon</a><img src="//ir-in.amazon-adsystem.com/e/ir?t=prahtml-21&l=ur2&o=31" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+<a id="the_link"></a>
+<script>
+    let srch = window.location.search;
+    const c = 'c';
+    const t = 't';
+    let code,text;
+
+    let g = srch.split("&");
+    for(let i=0; i< g.length; i++) {
+        let paramText = g[i];
+        if(paramText.startsWith("?")) {
+            paramText = paramText.substr(1);
+        }
+        let kvpair = paramText.split("=");
+        let key = kvpair[0];
+        let value = kvpair[1];
+
+        if(key === c) {
+            code = value;
+        }
+        else if (key === t) {
+            text = value;
+        }
+    }
+
+    if(code && text) {
+        let linkEl = document.getElementById("the_link");
+        linkEl.setAttribute("href", getPreparedCode(code));
+        linkEl.innerHTML = "Buy " + text;
+    }
+
+    function getPreparedCode(code) {
+        return "https://amzn.to/" + code;
+    }
+</script>
+</body>
+</html>
