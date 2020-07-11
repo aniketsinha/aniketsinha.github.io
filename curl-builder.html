@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!--
+        Basic
+    -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CURL Builder - Aniket Sinha</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <!--
+        Load Fonts
+    -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css">
+
+    <!--
+        Load CSS
+    -->
+    <link rel="stylesheet" href="css/basic.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/blogs.css" />
+    <link rel="stylesheet" href="css/ionicons.css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/owl.carousel.css" />
+
+    <link rel="stylesheet" href="css/gradient.css" />
+    <link rel="stylesheet" href="css/new-skin/new-skin.css" />
+    <link rel="stylesheet" href="css/new-skin/template-colors/green.css" />
+
+    <!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!--
+        Favicons
+    -->
+    <link rel="shortcut icon" href="images/favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="images/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="images/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+</head>
+
+<body ng-app="curlBuilder">
+<div class="page new-skin" ng-controller="curlFormController">
+
+    <!-- background -->
+    <div class="background gradient">
+        <ul class="bg-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <!--
+        Container
+    -->
+    <div class="container opened" data-animation-in="fadeInLeft" data-animation-out="fadeOutLeft">
+        <header class="header">
+            <div class="top-menu">
+                <ul>
+                    <li>
+                        <a href="/">
+                            <span class="icon ion-home"></span>
+                            <span class="link">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="dev-tools.html">
+                            <span class="icon ion-code"></span>
+                            <span class="link">More Dev Tools</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </header>
+        <div class="card-started" id="home-card">
+            <div class="profile no-photo">
+                <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                    <select ng-model="selected.method" ng-options="m for m in methods"></select>
+                    <div class="col col-d-6 col-t-6 col-m-12">
+                        <input type="text" ng-model="selected.url" placeholder="http://aniketsinha.com"></input>
+                    </div>
+                    <div class="col col-d-6 col-t-6 col-m-12" ng-repeat="sh in  selected.headers">
+                        <input type="text" ng-model="sh.key" placeholder="header key" style="width: 40%; float: left"></input>
+                        <input type="text" ng-model="sh.value" placeholder="header value" style="width: 45%; float: left"></input>
+                        <button ng-click="removeHeader($index)"><span class="icon ion-minus" style="padding-top: 50%;"></span></button>
+                    </div>
+                    <button ng-click="addHeader()"><span class="icon ion-plus" style="padding-top: 50%;"></span></button>
+                    <div class="text-box">
+                        <textarea rows="200" cols="200" class="ht350" id="ta-input" ng-model="selected.body"></textarea>
+                        <br><button ng-click="generateOutput()">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-inner animated active" id="unescape-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">CURL Builder</div>
+                    <div class="row">
+                        <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p>
+                                    <button onclick="copyCurlString()" id="btn-copy-curl"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <br>
+                                    <textarea rows="200" cols="200" class="ht350" id="curl-output" ng-model="output"></textarea>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!--
+    jQuery Scripts
+-->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.validate.js"></script>
+<script src="js/jquery.magnific-popup.js"></script>
+<script src="js/imagesloaded.pkgd.js"></script>
+<script src="js/isotope.pkgd.js"></script>
+<script src="js/jquery.slimscroll.js"></script>
+<script src="js/owl.carousel.js"></script>
+
+
+<script src="js/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+<script src="js/curl-app.js"></script>
+
+</body>
+</html>
