@@ -7,7 +7,7 @@
     -->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>CURL Builder - Aniket Sinha</title>
+    <title>JWT Decoder - Aniket Sinha</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <!--
@@ -62,8 +62,8 @@
     <meta name="google-adsense-account" content="ca-pub-3003294793017551">
 </head>
 
-<body ng-app="curlBuilder">
-<div class="page new-skin" ng-controller="curlFormController">
+<body>
+<div class="page new-skin">
 
     <!-- background -->
     <div class="background gradient">
@@ -119,34 +119,43 @@
         <div class="card-started" id="home-card">
             <div class="profile no-photo">
                 <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
-                    <select ng-model="selected.method" ng-options="m for m in methods"></select>
-                    <div class="col col-d-6 col-t-6 col-m-12">
-                        <input type="text" ng-model="selected.url" placeholder="http://aniketsinha.com"></input>
-                    </div>
-                    <div class="col col-d-6 col-t-6 col-m-12" ng-repeat="sh in  selected.headers">
-                        <input type="text" ng-model="sh.key" placeholder="header key" style="width: 40%; float: left"></input>
-                        <input type="text" ng-model="sh.value" placeholder="header value" style="width: 45%; float: left"></input>
-                        <button ng-click="removeHeader($index)"><span class="icon ion-minus" style="padding-top: 50%;"></span></button>
-                    </div>
-                    <button ng-click="addHeader()"><span class="icon ion-plus" style="padding-top: 50%;"></span></button>
                     <div class="text-box">
-                        <textarea rows="200" cols="200" class="ht350" id="ta-input" ng-model="selected.body"></textarea>
+                        <textarea rows="200" cols="200" class="ht350" id="jwt-input" placeholder="Paste your JWT token here (e.g., eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...)"></textarea>
+                        <br><button onclick="decodeJwt()">Decode JWT</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card-inner animated active" id="unescape-card">
+        <div class="card-inner animated active" id="jwt-decoder-card">
             <div class="card-wrap">
                 <div class="content about">
-                    <div class="title">CURL Builder</div>
+                    <div class="title">JWT Decoder</div>
                     <div class="row">
-                        <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
+                        <div class="col col-d-4 col-t-4 col-m-12 border-line-v">
                             <div class="text-box">
+                                <p><strong>Header:</strong></p>
                                 <p>
-                                    <button onclick="copyCurlString()" id="btn-copy-curl"><span class="icon ion-ios-copy"></span> Click to Copy</button>
-                                    <br>
-                                    <textarea rows="200" cols="200" class="ht350" id="curl-output" ng-model="output"></textarea>
+                                    <button class="no-show" onclick="copyJwtHeader()" id="btn-copy-jwt-header"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="jwt-header-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col col-d-4 col-t-4 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Payload:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyJwtPayload()" id="btn-copy-jwt-payload"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="jwt-payload-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col col-d-4 col-t-4 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Signature:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyJwtSignature()" id="btn-copy-jwt-signature"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="jwt-signature-output"></pre>
                                 </p>
                             </div>
                         </div>
@@ -178,8 +187,7 @@
 
 
 <script src="js/script.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
-<script src="js/curl-app.js"></script>
+<script src="js/jwt-decoder.js"></script>
 
 </body>
 </html>
