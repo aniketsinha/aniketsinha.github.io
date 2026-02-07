@@ -214,6 +214,88 @@
             min-height: 100px;
         }
         
+        /* Dev Tools Section */
+        .dev-tools-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+        }
+        
+        .dev-tools-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .dev-tools-section p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .tool-card {
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .tool-card:hover {
+            border-color: #78cc6d;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .tool-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tool-card-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .view-all-tools {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .view-all-tools a {
+            display: inline-block;
+            background: #78cc6d;
+            color: #ffffff;
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .view-all-tools a:hover {
+            background: #6bb85a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(120, 204, 109, 0.3);
+        }
+        
         /* Footer */
         footer {
             border-top: 1px solid #e5e5e5;
@@ -249,6 +331,18 @@
             
             .container {
                 padding: 0 1rem;
+            }
+            
+            .dev-tools-section {
+                padding: 2rem 1rem;
+            }
+            
+            .dev-tools-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -315,6 +409,72 @@
             
             <div class="back-to-home">
                 <a href="../index.html">← Back to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dev Tools Section -->
+    <section class="section">
+        <div class="container">
+            <div class="dev-tools-section">
+                <h2>Developer Tools</h2>
+                <p>Free, client-side developer tools to help you work faster. No data leaves your browser.</p>
+                
+                <div class="tools-grid">
+                    <a href="../tools.html#unescape-card" class="tool-card">
+                        <div class="tool-card-title">String Utilities</div>
+                        <div class="tool-card-description">Escape and unescape strings, prettify JSON, and format text in various cases.</div>
+                    </a>
+                    
+                    <a href="../tools.html#base64encode-card" class="tool-card">
+                        <div class="tool-card-title">Base64 Encode/Decode</div>
+                        <div class="tool-card-description">Encode and decode Base64 strings instantly. Perfect for data encoding tasks.</div>
+                    </a>
+                    
+                    <a href="../tools.html#urlencode-card" class="tool-card">
+                        <div class="tool-card-title">URL Encode/Decode</div>
+                        <div class="tool-card-description">Encode and decode URL components. Essential for web development.</div>
+                    </a>
+                    
+                    <a href="../tools.html#timestamp-card" class="tool-card">
+                        <div class="tool-card-title">Timestamp Converter</div>
+                        <div class="tool-card-description">Convert between Unix timestamps, ISO dates, and human-readable formats.</div>
+                    </a>
+                    
+                    <a href="../tools.html#textcase-card" class="tool-card">
+                        <div class="tool-card-title">Text Case Converter</div>
+                        <div class="tool-card-description">Convert text between camelCase, PascalCase, kebab-case, snake_case, and more.</div>
+                    </a>
+                    
+                    <a href="../tools.html#querystring-card" class="tool-card">
+                        <div class="tool-card-title">Query String Parser</div>
+                        <div class="tool-card-description">Parse and format URL query strings. View as JSON or formatted string.</div>
+                    </a>
+                    
+                    <a href="../tools.html#uuid-card" class="tool-card">
+                        <div class="tool-card-title">UUID Generator</div>
+                        <div class="tool-card-description">Generate random UUID v4 identifiers instantly. No server required.</div>
+                    </a>
+                    
+                    <a href="../curl-builder.html" class="tool-card">
+                        <div class="tool-card-title">CURL Builder</div>
+                        <div class="tool-card-description">Build and test CURL commands with custom headers, methods, and request bodies.</div>
+                    </a>
+                    
+                    <a href="../jwt-decoder.html" class="tool-card">
+                        <div class="tool-card-title">JWT Decoder</div>
+                        <div class="tool-card-description">Decode JWT tokens to view header, payload, and signature. Client-side only.</div>
+                    </a>
+                    
+                    <a href="../text-diff.html" class="tool-card">
+                        <div class="tool-card-title">Text Diff Viewer</div>
+                        <div class="tool-card-description">Compare two texts side-by-side with highlighted differences. Word-level diffing.</div>
+                    </a>
+                </div>
+                
+                <div class="view-all-tools">
+                    <a href="../tools.html">View All Tools →</a>
+                </div>
             </div>
         </div>
     </section>

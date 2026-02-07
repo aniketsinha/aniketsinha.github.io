@@ -34,6 +34,73 @@
     <link rel="stylesheet" href="css/new-skin/new-skin.css" />
     <link rel="stylesheet" href="css/new-skin/template-colors/green.css" />
 
+    <style>
+        /* Make desktop menu scrollable */
+        @media (min-width: 1024px) {
+            .header .top-menu ul {
+                max-height: calc(100vh - 100px);
+                overflow-y: auto;
+                overflow-x: hidden;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            
+            /* Improve text wrapping in output areas */
+            .card-inner pre {
+                word-wrap: break-word;
+                white-space: pre-wrap;
+                overflow-wrap: break-word;
+                max-width: 100%;
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+            
+            /* Better spacing for columns */
+            .content.about .row .col {
+                padding: 0 8px;
+            }
+            
+            /* Ensure text boxes don't overflow */
+            .text-box {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                max-width: 100%;
+            }
+            
+            .text-box pre {
+                word-break: break-all;
+                white-space: pre-wrap;
+                font-size: 0.85rem;
+                max-width: 100%;
+                overflow-x: auto;
+            }
+            
+            /* Reduce padding in card-wrap to give more space */
+            .card-inner .card-wrap {
+                padding: 30px 15px 0 30px;
+            }
+            
+            /* Better column widths for timestamp (3 columns) */
+            .content.about .row .col.col-d-4 {
+                min-width: 0;
+                flex: 1 1 33.333%;
+                max-width: 33.333%;
+            }
+            
+            /* Better column widths for 2 columns */
+            .content.about .row .col.col-d-6 {
+                min-width: 0;
+                flex: 1 1 50%;
+                max-width: 50%;
+            }
+            
+            /* Ensure strong tags don't cause overflow */
+            .text-box strong {
+                word-break: break-word;
+            }
+        }
+    </style>
+
     <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -119,9 +186,69 @@
                         </a>
                     </li>
                     <li>
+                        <a href="#urlencode-card">
+                            <span class="icon ion-link"></span>
+                            <span class="link">URL Encode/Decode</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#htmlentity-card">
+                            <span class="icon ion-code-working"></span>
+                            <span class="link">HTML Entity</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#timestamp-card">
+                            <span class="icon ion-clock"></span>
+                            <span class="link">Timestamp</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#textcase-card">
+                            <span class="icon ion-text"></span>
+                            <span class="link">Text Case</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#querystring-card">
+                            <span class="icon ion-funnel"></span>
+                            <span class="link">Query String</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#uuid-card">
+                            <span class="icon ion-key"></span>
+                            <span class="link">UUID Generator</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="curl-builder.html">
                             <span class="icon ion-laptop"></span>
                             <span class="link">CURL Builder</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="jwt-decoder.html">
+                            <span class="icon ion-locked"></span>
+                            <span class="link">JWT Decoder</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="text-diff.html">
+                            <span class="icon ion-document-text"></span>
+                            <span class="link">Text Diff</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html">
+                            <span class="icon ion-home"></span>
+                            <span class="link">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="blog/index.html">
+                            <span class="icon ion-document"></span>
+                            <span class="link">Blog</span>
                         </a>
                     </li>
                 </ul>
@@ -240,6 +367,176 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+
+        <div class="card-inner animated" id="urlencode-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">URL Encode/Decode</div>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Enter text to encode/decode URL components. Useful for query strings and URL parameters.</p>
+                    <div class="row">
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Encoded:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyUrlEncoded()" id="btn-copy-url-encoded"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="url-encoded-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Decoded:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyUrlDecoded()" id="btn-copy-url-decoded"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="url-decoded-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-inner animated" id="htmlentity-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">HTML Entity Encode/Decode</div>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Convert special characters like &lt; &gt; &amp; to HTML entities (&amp;lt; &amp;gt; &amp;amp;) and vice versa.</p>
+                    <div class="row">
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Encoded:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyHtmlEntityEncoded()" id="btn-copy-html-entity-encoded"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="html-entity-encoded-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Decoded:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyHtmlEntityDecoded()" id="btn-copy-html-entity-decoded"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="html-entity-decoded-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-inner animated" id="timestamp-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">Timestamp Converter</div>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Enter a Unix timestamp (seconds or milliseconds) or a date string to convert between formats. Example: 1770481416725 or "2025-02-07T10:30:16.725Z"</p>
+                    <div class="row">
+                        <div class="col col-d-4 col-t-4 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>ISO String:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyTimestampIso()" id="btn-copy-timestamp-iso"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="timestamp-iso-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col col-d-4 col-t-4 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Human Readable:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyTimestampDate()" id="btn-copy-timestamp-date"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="timestamp-date-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col col-d-4 col-t-4 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Unix Timestamp:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyTimestampUnix()" id="btn-copy-timestamp-unix"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="timestamp-unix-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-inner animated" id="textcase-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">Text Case Converter</div>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Convert text to various case formats: UPPERCASE, lowercase, camelCase, kebab-case, snake_case, PascalCase, and Title Case.</p>
+                    <div class="row">
+                        <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p>
+                                    <button class="no-show" onclick="copyTextCase()" id="btn-copy-text-case"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="text-case-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-inner animated" id="querystring-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">Query String Parser/Formatter</div>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Parse query strings (e.g., "key=value&key2=value2") to JSON or format JSON/object to query string format.</p>
+                    <div class="row">
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Parsed (JSON):</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyQueryStringParsed()" id="btn-copy-query-string-parsed"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="query-string-parsed-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Formatted:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyQueryStringFormatted()" id="btn-copy-query-string-formatted"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="query-string-formatted-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-inner animated" id="uuid-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">UUID Generator</div>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Generate a random UUID v4. Click "Generate New UUID" to create a new one. No input required.</p>
+                    <div class="row">
+                        <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p>
+                                    <button onclick="generateUuid()" id="btn-generate-uuid"><span class="icon ion-refresh"></span> Generate New UUID</button>
+                                    <button class="no-show" onclick="copyUuid()" id="btn-copy-uuid"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="uuid-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
