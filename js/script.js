@@ -21,8 +21,18 @@ $(function () {
 		/* vars */
 		var width = $(window).width();
 		var id = $(this).attr('href');
-		var h = parseFloat($(id).offset().top);
-		var card_item = $(id);
+		
+		/* Check if this is an anchor link (starts with #) or external link */
+		var isAnchorLink = id && id.startsWith('#');
+		
+		/* If it's an external link, allow normal navigation */
+		if (!isAnchorLink) {
+			return true; // Allow normal navigation
+		}
+		
+		var targetElement = $(id);
+		var h = targetElement.length > 0 ? parseFloat(targetElement.offset().top) : 0;
+		var card_item = targetElement;
 		var menu_items = $('.top-menu li');
 		var menu_item = $(this).closest('li');
 		var d_lnk = $('.lnks .lnk.discover');
@@ -60,7 +70,7 @@ $(function () {
 				scrollTop: h - 76
 			}, 800);
 		}
-		return false;
+		return false; // Prevent default only for anchor links
 	});
 
 	$(window).on('resize', function(){
@@ -81,10 +91,15 @@ $(function () {
 				var scrollPos = $(window).scrollTop();
 				$('.top-menu ul li a').each(function () {
 					var currLink = $(this);
-					var refElement = $(currLink.attr("href"));
-					if (refElement.offset().top - 76 <= scrollPos) {
-						$('.top-menu ul li').removeClass("active");
-						currLink.closest('li').addClass("active");
+					var href = currLink.attr("href");
+					if (href && href.startsWith('#')) {
+						var refElement = $(href);
+						if (refElement.length > 0 && refElement.offset()) {
+							if (refElement.offset().top - 76 <= scrollPos) {
+								$('.top-menu ul li').removeClass("active");
+								currLink.closest('li').addClass("active");
+							}
+						}
 					}
 				});
 			});
@@ -108,10 +123,15 @@ $(function () {
 			var scrollPos = $(window).scrollTop();
 			$('.top-menu ul li a').each(function () {
 				var currLink = $(this);
-				var refElement = $(currLink.attr("href"));
-				if (refElement.offset().top - 76 <= scrollPos) {
-					$('.top-menu ul li').removeClass("active");
-					currLink.closest('li').addClass("active");
+				var href = currLink.attr("href");
+				if (href && href.startsWith('#')) {
+					var refElement = $(href);
+					if (refElement.length > 0 && refElement.offset()) {
+						if (refElement.offset().top - 76 <= scrollPos) {
+							$('.top-menu ul li').removeClass("active");
+							currLink.closest('li').addClass("active");
+						}
+					}
 				}
 			});
 		});
