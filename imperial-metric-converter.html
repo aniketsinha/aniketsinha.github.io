@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Imperial to Metric Converter - Aniket Sinha</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Convert between imperial and metric units: weight (pounds/kg, ounces/grams), length (inches/cm, feet/meters, miles/km), and volume (fluid ounces/ml, cups/ml, gallons/liters)." />
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css">
+
+    <link rel="stylesheet" href="css/basic.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/blogs.css" />
+    <link rel="stylesheet" href="css/ionicons.css" />
+    
+    <script data-ad-client="ca-pub-3003294793017551" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f5dc !important;
+            color: #2c2c2c;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        /* Navigation */
+        nav {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: #1a1a1a;
+        }
+        .nav-links a.active {
+            color: #78cc6d;
+        }
+        .container { max-width: none !important; width: calc(100vw - 150px) !important; margin: 8vh 3vw !important; }
+        .card-wrap { padding: 30px 40px !important; background: #ffffff !important; }
+        .converter-post {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.8;
+            color: #2c2c2c;
+            background: #ffffff;
+            border-radius: 8px;
+        }
+        @media (min-width: 1600px) { .converter-post { max-width: 1400px; margin: 0 auto; } }
+        .converter-post h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+        .converter-post h2 {
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+        .converter-post p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #2c2c2c;
+        }
+        .conversion-pair {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 25px 0;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 5px;
+            border-left: 3px solid #d0d0d0;
+        }
+        .conversion-input-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .conversion-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .conversion-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s;
+        }
+        .conversion-input:focus {
+            outline: none;
+            border-color: #78cc6d;
+        }
+        .conversion-arrow {
+            font-size: 1.5em;
+            color: #78cc6d;
+            font-weight: bold;
+            padding: 0 10px;
+        }
+        .copy-button {
+            margin-top: 8px;
+            padding: 6px 12px;
+            background: #78cc6d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: none;
+            width: fit-content;
+        }
+        .copy-button:hover {
+            background: #6bb85a;
+        }
+        .copy-button.show {
+            display: inline-block;
+        }
+        .back-link {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+        .back-link a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .converter-post h1 {
+                font-size: 2em;
+            }
+            .converter-post h2 {
+                font-size: 1.5em;
+            }
+            .conversion-pair {
+                flex-direction: column;
+            }
+            .conversion-arrow {
+                transform: rotate(90deg);
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+            .nav-container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Aniket Sinha</a>
+            <ul class="nav-links">
+                <li><a href="imperial-metric-converter.html" class="active">Imperial-Metric</a></li>
+                <li><a href="temperature-converter.html">Temperature</a></li>
+                <li><a href="timezone-converter.html">Timezone</a></li>
+                <li><a href="tools.html">Dev Tools</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog/index.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="converter-post">
+        <h1>Imperial to Metric Converter</h1>
+        <p>Convert between imperial and metric units for weight, length, and volume. All conversions happen in real-time as you type. Perfect for travel, cooking, and everyday use.</p>
+
+        <h2>Weight</h2>
+        
+        <div class="conversion-pair">
+            <div class="conversion-input-group">
+                <label class="conversion-label">Pounds (lb)</label>
+                <input type="number" class="conversion-input" id="pounds-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('pounds-input')">Copy</button>
+            </div>
+            <div class="conversion-arrow">↔</div>
+            <div class="conversion-input-group">
+                <label class="conversion-label">Kilograms (kg)</label>
+                <input type="number" class="conversion-input" id="kilograms-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('kilograms-input')">Copy</button>
+            </div>
+        </div>
+        
+        <div class="conversion-pair">
+            <div class="conversion-input-group">
+                <label class="conversion-label">Ounces (oz)</label>
+                <input type="number" class="conversion-input" id="ounces-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('ounces-input')">Copy</button>
+            </div>
+            <div class="conversion-arrow">↔</div>
+            <div class="conversion-input-group">
+                <label class="conversion-label">Grams (g)</label>
+                <input type="number" class="conversion-input" id="grams-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('grams-input')">Copy</button>
+            </div>
+        </div>
+
+        <h2>Length</h2>
+        
+        <div class="conversion-pair">
+            <div class="conversion-input-group">
+                <label class="conversion-label">Inches (in)</label>
+                <input type="number" class="conversion-input" id="inches-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('inches-input')">Copy</button>
+            </div>
+            <div class="conversion-arrow">↔</div>
+            <div class="conversion-input-group">
+                <label class="conversion-label">Centimeters (cm)</label>
+                <input type="number" class="conversion-input" id="centimeters-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('centimeters-input')">Copy</button>
+            </div>
+        </div>
+        
+        <div class="conversion-pair">
+            <div class="conversion-input-group">
+                <label class="conversion-label">Feet (ft)</label>
+                <input type="number" class="conversion-input" id="feet-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('feet-input')">Copy</button>
+            </div>
+            <div class="conversion-arrow">↔</div>
+            <div class="conversion-input-group">
+                <label class="conversion-label">Meters (m)</label>
+                <input type="number" class="conversion-input" id="meters-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('meters-input')">Copy</button>
+            </div>
+        </div>
+        
+        <div class="conversion-pair">
+            <div class="conversion-input-group">
+                <label class="conversion-label">Miles (mi)</label>
+                <input type="number" class="conversion-input" id="miles-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('miles-input')">Copy</button>
+            </div>
+            <div class="conversion-arrow">↔</div>
+            <div class="conversion-input-group">
+                <label class="conversion-label">Kilometers (km)</label>
+                <input type="number" class="conversion-input" id="kilometers-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('kilometers-input')">Copy</button>
+            </div>
+        </div>
+
+        <h2>Volume</h2>
+        
+        <div class="conversion-pair">
+            <div class="conversion-input-group">
+                <label class="conversion-label">Fluid Ounces (fl oz)</label>
+                <input type="number" class="conversion-input" id="floz-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('floz-input')">Copy</button>
+            </div>
+            <div class="conversion-arrow">↔</div>
+            <div class="conversion-input-group">
+                <label class="conversion-label">Milliliters (ml)</label>
+                <input type="number" class="conversion-input" id="milliliters-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('milliliters-input')">Copy</button>
+            </div>
+        </div>
+        
+        <div class="conversion-pair">
+            <div class="conversion-input-group">
+                <label class="conversion-label">Cups</label>
+                <input type="number" class="conversion-input" id="cups-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('cups-input')">Copy</button>
+            </div>
+            <div class="conversion-arrow">↔</div>
+            <div class="conversion-input-group">
+                <label class="conversion-label">Milliliters (ml)</label>
+                <input type="number" class="conversion-input" id="cups-ml-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('cups-ml-input')">Copy</button>
+            </div>
+        </div>
+        
+        <div class="conversion-pair">
+            <div class="conversion-input-group">
+                <label class="conversion-label">Gallons (gal)</label>
+                <input type="number" class="conversion-input" id="gallons-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('gallons-input')">Copy</button>
+            </div>
+            <div class="conversion-arrow">↔</div>
+            <div class="conversion-input-group">
+                <label class="conversion-label">Liters (L)</label>
+                <input type="number" class="conversion-input" id="liters-input" placeholder="0" step="any">
+                <button class="copy-button" onclick="copyValue('liters-input')">Copy</button>
+            </div>
+        </div>
+
+        <div class="back-link">
+            <a href="tools.html">← Back to Dev Tools</a>
+        </div>
+    </div>
+    
+    <script src="js/imperial-metric-converter.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3003294793017551"
+            crossorigin="anonymous"></script>
+</body>
+</html>

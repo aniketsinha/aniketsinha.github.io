@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Timezone Converter - Aniket Sinha</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Convert times between different timezones. View current time in major cities worldwide and convert custom times to any timezone." />
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css">
+
+    <link rel="stylesheet" href="css/basic.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/blogs.css" />
+    <link rel="stylesheet" href="css/ionicons.css" />
+    
+    <script data-ad-client="ca-pub-3003294793017551" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f5dc !important;
+            color: #2c2c2c;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        /* Navigation */
+        nav {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: #1a1a1a;
+        }
+        .nav-links a.active {
+            color: #78cc6d;
+        }
+        .container { max-width: none !important; width: calc(100vw - 150px) !important; margin: 8vh 3vw !important; }
+        .card-wrap { padding: 30px 40px !important; background: #ffffff !important; }
+        .converter-post {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.8;
+            color: #2c2c2c;
+            background: #ffffff;
+            border-radius: 8px;
+        }
+        @media (min-width: 1600px) { .converter-post { max-width: 1400px; margin: 0 auto; } }
+        .converter-post h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+        .converter-post h2 {
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+        .converter-post p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #2c2c2c;
+        }
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .city-item {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 3px solid #d0d0d0;
+            text-align: center;
+        }
+        .city-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+        .city-time {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #78cc6d;
+            margin-bottom: 5px;
+        }
+        .city-date {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .city-timezone {
+            font-size: 0.85em;
+            color: #999;
+        }
+        .custom-conversion {
+            margin: 40px 0;
+            padding: 30px;
+            background: #fafafa;
+            border-radius: 5px;
+            border-left: 3px solid #d0d0d0;
+        }
+        .conversion-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: end;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .form-input, .form-select {
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s;
+        }
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #78cc6d;
+        }
+        .searchable-dropdown {
+            position: relative;
+        }
+        .dropdown-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s;
+            background: white;
+            cursor: pointer;
+        }
+        .dropdown-input:focus {
+            outline: none;
+            border-color: #78cc6d;
+        }
+        .dropdown-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .dropdown-list.show {
+            display: block;
+        }
+        .dropdown-optgroup {
+            padding: 8px 12px;
+            font-weight: 600;
+            font-size: 0.85em;
+            color: #666;
+            background: #f5f5f5;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .dropdown-option {
+            padding: 10px 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dropdown-option:hover {
+            background: #f5f5f5;
+        }
+        .dropdown-option.selected {
+            background: #e8f5e9;
+        }
+        .option-label {
+            flex: 1;
+        }
+        .option-offset {
+            color: #666;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        .convert-button {
+            padding: 12px 30px;
+            background: #78cc6d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+        .convert-button:hover {
+            background: #6bb85a;
+        }
+        .converted-result {
+            background: white;
+            border: 2px solid #78cc6d;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            display: none;
+            margin-top: 20px;
+        }
+        .converted-result.show {
+            display: block;
+        }
+        .result-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .result-time {
+            font-size: 2em;
+            font-weight: 700;
+            color: #78cc6d;
+            margin-bottom: 5px;
+        }
+        .result-date {
+            font-size: 1.1em;
+            color: #666;
+        }
+        .back-link {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+        .back-link a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+            .nav-container {
+                padding: 0 1rem;
+            }
+            .converter-post h1 {
+                font-size: 2em;
+            }
+            .converter-post h2 {
+                font-size: 1.5em;
+            }
+            .cities-grid {
+                grid-template-columns: 1fr;
+            }
+            .conversion-form {
+                flex-direction: column;
+            }
+            .form-group {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Aniket Sinha</a>
+            <ul class="nav-links">
+                <li><a href="imperial-metric-converter.html">Imperial-Metric</a></li>
+                <li><a href="temperature-converter.html">Temperature</a></li>
+                <li><a href="timezone-converter.html" class="active">Timezone</a></li>
+                <li><a href="tools.html">Dev Tools</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog/index.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="converter-post">
+        <h1>Timezone Converter</h1>
+        <p>View current time in major cities worldwide and convert times between different timezones. Perfect for business, travel, and global communication.</p>
+
+        <h2>Current Time Around the World</h2>
+        <div class="cities-grid" id="cities-grid">
+            <!-- Cities will be populated by JavaScript -->
+        </div>
+
+        <h2>Convert Time to Different Timezone</h2>
+        <div class="custom-conversion">
+            <form class="conversion-form" id="conversion-form">
+                <div class="form-group">
+                    <label class="form-label">Date & Time</label>
+                    <input type="datetime-local" class="form-input" id="time-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Target Timezone</label>
+                    <div class="searchable-dropdown">
+                        <input type="text" class="dropdown-input" id="timezone-input" placeholder="Type to search (e.g., IST, EST, GMT)..." autocomplete="off" required>
+                        <div class="dropdown-list" id="timezone-list"></div>
+                        <input type="hidden" id="timezone-select" name="timezone" required>
+                    </div>
+                        
+                </div>
+                <button type="submit" class="convert-button">Convert</button>
+            </form>
+            
+            <div class="converted-result" id="converted-result">
+                <div class="result-label">Converted Time</div>
+                <div class="result-time" id="result-time"></div>
+                <div class="result-date" id="result-date"></div>
+            </div>
+        </div>
+
+        <div class="back-link">
+            <a href="tools.html">← Back to Dev Tools</a>
+        </div>
+    </div>
+    
+    <script src="js/timezone-converter.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3003294793017551"
+            crossorigin="anonymous"></script>
+</body>
+</html>
