@@ -7,7 +7,7 @@
     -->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dev Tools - Aniket Sinha</title>
+    <title>Aniket Sinha - Dev Tools</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <!--
@@ -31,37 +31,14 @@
         Background Gradient
     -->
     <link rel="stylesheet" href="css/gradient.css" />
-
-    <!--
-        Template New-Skin
-    -->
     <link rel="stylesheet" href="css/new-skin/new-skin.css" />
-
-    <!--
-        Template RTL
-    -->
-    <!--<link rel="stylesheet" href="css/rtl.css" />-->
-
-    <!--
-        Template Colors
-    -->
     <link rel="stylesheet" href="css/new-skin/template-colors/green.css" />
-    <!--    <link rel="stylesheet" href="css/template-colors/blue.css" />-->
-
-
-    <!--
-        Template Dark
-    -->
-    <!--<link rel="stylesheet" href="css/template-dark/dark.css" />-->
-
 
     <!--[if lt IE 9]>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3003294793017551"
-            crossorigin="anonymous"></script>
+    <script data-ad-client="ca-pub-3003294793017551" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <!--
         Favicons
     -->
@@ -79,7 +56,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="images/favicons/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
-<!--    <link rel="manifest" href="images/favicons/manifest.json">-->
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="images/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -89,8 +65,6 @@
 
 <body>
 <div class="page new-skin">
-
-
     <!-- background -->
     <div class="background gradient">
         <ul class="bg-bubbles">
@@ -143,9 +117,71 @@
                             <span class="icon ion-wand"></span>
                             <span class="link">Base64 Decode</span>
                         </a>
+                    </li>
+                    <li>
+                        <a href="#urlencode-card">
+                            <span class="icon ion-link"></span>
+                            <span class="link">URL Encode/Decode</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#htmlentity-card">
+                            <span class="icon ion-code-working"></span>
+                            <span class="link">HTML Entity</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#timestamp-card">
+                            <span class="icon ion-clock"></span>
+                            <span class="link">Timestamp</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#textcase-card">
+                            <span class="icon ion-text"></span>
+                            <span class="link">Text Case</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#querystring-card">
+                            <span class="icon ion-funnel"></span>
+                            <span class="link">Query String</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#uuid-card">
+                            <span class="icon ion-key"></span>
+                            <span class="link">UUID Generator</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="curl-builder.html">
                             <span class="icon ion-laptop"></span>
                             <span class="link">CURL Builder</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="jwt-decoder.html">
+                            <span class="icon ion-locked"></span>
+                            <span class="link">JWT Decoder</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="text-diff.html">
+                            <span class="icon ion-document-text"></span>
+                            <span class="link">Text Diff</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html">
+                            <span class="icon ion-home"></span>
+                            <span class="link">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="blog/index.html">
+                            <span class="icon ion-document"></span>
+                            <span class="link">Blog</span>
                         </a>
                     </li>
                 </ul>
@@ -214,7 +250,7 @@
                             <div class="text-box">
                                 <p>
                                     <button class="no-show" onclick="copyPrettyJson()" id="btn-copy-pretty-json"><span class="icon ion-ios-copy"></span> Click to Copy</button>
-                                    <pre id="json-prettify-output"></pre>
+                                <pre id="json-prettify-output"></pre>
                                 </p>
                             </div>
                         </div>
@@ -267,10 +303,160 @@
             </div>
         </div>
 
+        <div class="card-inner animated" id="urlencode-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">URL Encode/Decode</div>
+                    <div class="row">
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Encoded:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyUrlEncoded()" id="btn-copy-url-encoded"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="url-encoded-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Decoded:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyUrlDecoded()" id="btn-copy-url-decoded"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="url-decoded-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="card-inner animated" id="htmlentity-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">HTML Entity Encode/Decode</div>
+                    <div class="row">
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Encoded:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyHtmlEntityEncoded()" id="btn-copy-html-entity-encoded"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="html-entity-encoded-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Decoded:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyHtmlEntityDecoded()" id="btn-copy-html-entity-decoded"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="html-entity-decoded-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!--        <textarea name="textarea-no-show" id="ta-no-show" cols="0" rows="0" style="position:absolute; left: -100%"></textarea>-->
+        <div class="card-inner animated" id="timestamp-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">Timestamp Converter</div>
+                    <div class="row">
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Human Readable Date:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyTimestampDate()" id="btn-copy-timestamp-date"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="timestamp-date-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Unix Timestamp:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyTimestampUnix()" id="btn-copy-timestamp-unix"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="timestamp-unix-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="card-inner animated" id="textcase-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">Text Case Converter</div>
+                    <div class="row">
+                        <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p>
+                                    <button class="no-show" onclick="copyTextCase()" id="btn-copy-text-case"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="text-case-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-inner animated" id="querystring-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">Query String Parser/Formatter</div>
+                    <div class="row">
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Parsed (JSON):</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyQueryStringParsed()" id="btn-copy-query-string-parsed"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="query-string-parsed-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col col-d-6 col-t-6 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p><strong>Formatted:</strong></p>
+                                <p>
+                                    <button class="no-show" onclick="copyQueryStringFormatted()" id="btn-copy-query-string-formatted"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="query-string-formatted-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-inner animated" id="uuid-card">
+            <div class="card-wrap">
+                <div class="content about">
+                    <div class="title">UUID Generator</div>
+                    <div class="row">
+                        <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
+                            <div class="text-box">
+                                <p>
+                                    <button onclick="generateUuid()" id="btn-generate-uuid"><span class="icon ion-refresh"></span> Generate New UUID</button>
+                                    <button class="no-show" onclick="copyUuid()" id="btn-copy-uuid"><span class="icon ion-ios-copy"></span> Click to Copy</button>
+                                    <pre id="uuid-output"></pre>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
