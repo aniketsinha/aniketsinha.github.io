@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Understanding MCP: Model Context Protocol Use Cases and Examples | Aniket Sinha</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Learn what Model Context Protocol (MCP) is, how it works, and real-world use cases with Atlassian and GitLab integrations. Discover how MCP connects AI to external systems." />
+    <meta name="keywords" content="MCP Model Context Protocol, AI tools, AI extensions, Claude AI, Cursor IDE, AI productivity, AI development tools, MCP use cases" />
+    <meta name="author" content="Aniket Sinha" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Understanding MCP: Model Context Protocol Use Cases and Examples" />
+    <meta property="og:description" content="MCP connects AI to external systems. Learn how it works and see real-world examples with Atlassian and GitLab." />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Understanding MCP: Model Context Protocol Use Cases and Examples" />
+    <meta property="twitter:description" content="MCP connects AI to external systems. Learn how it works and see real-world examples with Atlassian and GitLab." />
+    
+    <!-- Load Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css">
+    
+    <!-- Load CSS -->
+    <link rel="stylesheet" href="../../css/basic.css" />
+    <link rel="stylesheet" href="../../css/layout.css" />
+    <link rel="stylesheet" href="../../css/blogs.css" />
+    <link rel="stylesheet" href="../../css/ionicons.css" />
+    
+    <!-- Google AdSense -->
+    <script data-ad-client="ca-pub-3003294793017551" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    <style>
+        body {
+            background: #f5f5dc !important;
+            color: #2c2c2c;
+        }
+        .container { max-width: none !important; width: calc(100vw - 150px) !important; margin: 8vh 3vw !important; }
+        .card-wrap { padding: 30px 40px !important; background: #ffffff !important; }
+        .blog-post {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.8;
+            color: #2c2c2c;
+            background: #ffffff;
+            border-radius: 8px;
+        }
+        @media (min-width: 1600px) { .blog-post { max-width: 1400px; margin: 0 auto; } }
+        .blog-post h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+        .blog-post h2 {
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+        .blog-post h3 {
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #333333;
+            font-weight: 600;
+        }
+        .blog-post p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #2c2c2c;
+        }
+        .blog-post strong {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+        .blog-post .meta {
+            color: #666666;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .blog-post blockquote {
+            border-left: 3px solid #d0d0d0;
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            color: #4a4a4a;
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .blog-post ul, .blog-post ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+        .blog-post li {
+            margin-bottom: 10px;
+            color: #2c2c2c;
+        }
+        .blog-post a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .blog-post a:hover {
+            text-decoration: underline;
+            color: #0052a3;
+        }
+        .highlight-box {
+            background: #f9f9f9;
+            border-left: 3px solid #d0d0d0;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 5px;
+            color: #2c2c2c;
+        }
+        .highlight-box strong {
+            color: #1a1a1a;
+        }
+        .ad-container {
+            margin: 40px 0;
+            text-align: center;
+            min-height: 250px;
+            background: #f5f5dc;
+            padding: 20px;
+            border-radius: 8px;
+            display: none; /* Hide until AdSense is approved - remove this line when ready */
+        }
+        /* Uncomment below when AdSense is approved to show ads */
+        /* .ad-container { display: block !important; } */
+        .conclusion {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 8px;
+            color: #2c2c2c;
+        }
+        .conclusion strong {
+            color: #1a1a1a;
+        }
+        .conclusion ul {
+            color: #2c2c2c;
+        }
+        @media (max-width: 768px) {
+            .blog-post h1 {
+                font-size: 2em;
+            }
+            .blog-post h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-post">
+        <article>
+            <h1>Understanding MCP: Model Context Protocol Use Cases and Examples</h1>
+            
+            <div class="meta">
+                <span><i class="far fa-calendar"></i> February 2025</span> | 
+                <span><i class="far fa-user"></i> Aniket Sinha</span> | 
+                <span><i class="far fa-clock"></i> 5 min read</span>
+            </div>
+            
+            <p>Model Context Protocol connects AI to external systems through an open standard—think of it as USB-C for AI, but for artificial intelligence applications.</p>
+            
+            <p>What makes MCP powerful is how it transforms your workflow. Rather than constantly switching between different tools and losing your train of thought, AI can access them directly through MCP, which eliminates the context switching that kills productivity and accelerates your entire workflow.</p>
+            
+            <p>I'll explain what MCP is, how it works, and show you some practical examples.</p>
+            
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3003294793017551"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <h2>The Fundamental Difference</h2>
+            
+            <p>Without tools, an AI agent is just a chatbot. It can talk, answer questions, and generate text, but it can't actually do things in the real world.</p>
+            
+            <p>That's where MCP changes everything. When you add MCP, you're giving AI the ability to act—not just respond. It connects AI directly to your systems, enabling it to fetch live data, update records, create content, and perform actual actions rather than just talking about them.</p>
+            
+            <p>This represents a fundamental shift from conversation to action, from answering questions to actually doing work, from chatbot to true agent.</p>
+            
+            <div class="highlight-box">
+                <strong>The transformation:</strong> Without MCP, AI talks. With MCP, AI acts. This distinction transforms AI from a helpful assistant into a capable agent that can interact with your world.
+            </div>
+            
+            <h2>What is Model Context Protocol (MCP)?</h2>
+            
+            <p>Model Context Protocol is an open standard that connects AI applications to external systems through a standardized interface. No need for custom integrations for every tool.</p>
+            
+            <p>MCP uses a client-server model. The AI application is the client, and external systems run MCP servers. They communicate using JSON-RPC over stdio or Server-Sent Events (SSE). Simple and reliable.</p>
+            
+            <p>MCP gives you three things:</p>
+            
+            <ul>
+                <li><strong>Tools:</strong> Functions the AI can call—APIs, database queries, actions</li>
+                <li><strong>Resources:</strong> Data sources the application controls—files, database records, system state</li>
+                <li><strong>Prompts:</strong> Reusable templates users can invoke</li>
+            </ul>
+            
+            <p>MCP is vendor-neutral, so it works across different AI platforms. Use Claude, Cursor, or any other AI tool—they all work with the same MCP servers. No rebuilding integrations when you switch tools.</p>
+            
+            <div class="highlight-box">
+                <strong>The key insight:</strong> MCP connects. It bridges AI applications to external systems in real time. It doesn't teach or configure—it just makes connections happen.
+            </div>
+            
+            <h2>How MCP Works</h2>
+            
+            <p>MCP uses a simple client-server architecture. AI applications are clients, external systems run MCP servers, and they communicate via JSON-RPC over stdio or Server-Sent Events. When you ask AI to fetch data or perform an action, MCP handles the connection complexity. It standardizes the interface so everything looks the same to the AI.</p>
+            
+            <p>That standardization is powerful. Build one MCP server, use it with multiple AI tools. Build once, use everywhere.</p>
+            
+            <h2>When to Use MCP</h2>
+            
+            <p>Use MCP when you need real-time access to external databases, integration with business tools (CRM, project management, analytics), or multi-tool workflows. MCP shines with live connections to systems that change constantly—it's built for current, up-to-date data, not static knowledge.</p>
+            
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3003294793017551"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <h2>Real-World MCP Examples</h2>
+            
+            <p>Here are some real examples of MCP in action.</p>
+            
+            <h3>Atlassian MCP: Jira and Confluence Integration</h3>
+            
+            <p>Atlassian MCP connects AI to your Jira and Confluence instances. Instead of switching tabs constantly, ask AI to fetch Jira ticket details—description, acceptance criteria, linked issues, comments. You get complete context without leaving your editor.</p>
+            
+            <p>After implementing a feature, AI drafts Confluence pages and MCP publishes them. You review and approve. Need to communicate? AI drafts comments and MCP posts them to Jira tickets. Your team stays informed, you stay focused on coding.</p>
+            
+            <div class="highlight-box">
+                <strong>The workflow benefit:</strong> Atlassian MCP eliminates context switching. Gather requirements, update documentation, communicate with your team—all from your editor. Saves hours per week.
+            </div>
+            
+            <h3>GitLab MCP: Merge Request Management</h3>
+            
+            <p>GitLab MCP streamlines code review. Instead of writing MR descriptions manually, AI analyzes your code changes, MCP fetches related issues, and AI drafts descriptions. To address review comments, ask "Get all comments on MR !123" and MCP fetches everything. AI analyzes feedback and suggests code changes, then MCP posts responses and marks comments resolved.</p>
+            
+            <p>Check MR status, respond to comments, update descriptions—all from your editor. No context switching. Review cycle time drops 40-60% because you're not jumping between tools.</p>
+            
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3003294793017551"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <h2>Why MCP Matters</h2>
+            
+            <p>MCP doesn't just connect systems—it transforms workflows by eliminating friction. With Atlassian MCP, you eliminate context switching between Jira, Confluence, and your editor. GitLab MCP streamlines code review into a single workflow. These translate to hours saved per week, faster delivery, and better collaboration.</p>
+            
+            <p>Getting started is straightforward: choose an MCP server, configure it in your AI tool (Claude, Cursor, etc.), connect to your systems, and start using AI to interact with your tools. Most MCP servers are open source and well-documented. Small investment—usually just configuration time—but substantial return.</p>
+            
+            <h2>Conclusion: MCP Connects AI to Your World</h2>
+            
+            <div class="conclusion">
+                <p><strong>Bottom line:</strong> MCP connects AI to external systems and transforms workflows. Use it when you need real-time data, API integrations, and live connections to systems that change frequently.</p>
+                
+                <p>For developers, MCP eliminates context switching, connects AI to existing tools without rebuilding, automates repetitive tasks, and speeds up code review and documentation. Start using it today.</p>
+            </div>
+            
+            <div style="margin-top: 50px; padding-top: 30px; border-top: 2px solid #e0e0e0;">
+                <h3 style="color: #333333;">Further Reading</h3>
+                <ul>
+                    <li><a href="https://docs.claude.com/id/docs/agents-and-tools/mcp" target="_blank" rel="noopener">Model Context Protocol Documentation</a></li>
+                    <li><a href="https://www.mcplist.ai/" target="_blank" rel="noopener">MCP Server Directory</a></li>
+                    <li><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">Model Context Protocol Official Site</a></li>
+                </ul>
+            </div>
+        </article>
+    </div>
+    
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3003294793017551"
+            crossorigin="anonymous"></script>
+</body>
+</html>
