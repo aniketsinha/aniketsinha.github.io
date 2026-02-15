@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AI Should Review Your Thinking, Not Replace It | Aniket Sinha</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="A practical staff-engineer workflow for using AI without outsourcing judgment: Think → Commit → Consult, plus a review-board approach for design docs, PR reviews, incidents, and strategy." />
+    <meta name="keywords" content="AI critical thinking, staff software engineer, engineering judgment, design docs, PR reviews, incident response, AI workflows, tool for thought, Advait Sarkar" />
+    <meta name="author" content="Aniket Sinha" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="AI Should Review Your Thinking, Not Replace It" />
+    <meta property="og:description" content="Use AI as structured dissent. A staff-engineer workflow: Think → Commit → Consult." />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="AI Should Review Your Thinking, Not Replace It" />
+    <meta property="twitter:description" content="Use AI as structured dissent. A staff-engineer workflow: Think → Commit → Consult." />
+    
+    <!-- Load Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css">
+    
+    <!-- Load CSS -->
+    <link rel="stylesheet" href="../../css/basic.css" />
+    <link rel="stylesheet" href="../../css/layout.css" />
+    <link rel="stylesheet" href="../../css/blogs.css" />
+    <link rel="stylesheet" href="../../css/ionicons.css" />
+    
+    <!-- Google AdSense -->
+    <script data-ad-client="ca-pub-3003294793017551" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    <style>
+        body {
+            background: #f5f5dc !important;
+            color: #2c2c2c;
+        }
+        .container { max-width: none !important; width: calc(100vw - 150px) !important; margin: 8vh 3vw !important; }
+        .card-wrap { padding: 30px 40px !important; background: #ffffff !important; }
+        .blog-post {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.8;
+            color: #2c2c2c;
+            background: #ffffff;
+            border-radius: 8px;
+        }
+        @media (min-width: 1600px) { .blog-post { max-width: 1400px; margin: 0 auto; } }
+        .blog-post h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+        .blog-post h2 {
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+        .blog-post h3 {
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #333333;
+            font-weight: 600;
+        }
+        .blog-post p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #2c2c2c;
+        }
+        .blog-post strong {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+        .blog-post .meta {
+            color: #666666;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .blog-post blockquote {
+            border-left: 3px solid #d0d0d0;
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            color: #4a4a4a;
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .blog-post ul, .blog-post ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+        .blog-post li {
+            margin-bottom: 10px;
+            color: #2c2c2c;
+        }
+        .blog-post a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .blog-post a:hover {
+            text-decoration: underline;
+            color: #0052a3;
+        }
+        .blog-post code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+        .blog-post pre {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        .blog-post pre code {
+            background: none;
+            padding: 0;
+        }
+        .highlight-box {
+            background: #f9f9f9;
+            border-left: 3px solid #d0d0d0;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 5px;
+            color: #2c2c2c;
+        }
+        .highlight-box strong {
+            color: #1a1a1a;
+        }
+        .ad-container {
+            margin: 40px 0;
+            text-align: center;
+            min-height: 250px;
+            background: #f5f5dc;
+            padding: 20px;
+            border-radius: 8px;
+            display: none; /* Hide until AdSense is approved - remove this line when ready */
+        }
+        /* Uncomment below when AdSense is approved to show ads */
+        /* .ad-container { display: block !important; } */
+        .conclusion {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 8px;
+            color: #2c2c2c;
+        }
+        .conclusion strong {
+            color: #1a1a1a;
+        }
+        .conclusion ul {
+            color: #2c2c2c;
+        }
+        @media (max-width: 768px) {
+            .blog-post h1 {
+                font-size: 2em;
+            }
+            .blog-post h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-post">
+        <article>
+            <h1>AI Should Review Your Thinking, Not Replace It</h1>
+            
+            <div class="meta">
+                <span><i class="far fa-calendar"></i> February 2026</span> | 
+                <span><i class="far fa-user"></i> Aniket Sinha</span> | 
+                <span><i class="far fa-clock"></i> 9 min read</span>
+            </div>
+            
+            <p>A mildly embarrassing confession: I asked GPT how to stop AI from killing my critical thinking.</p>
+            
+            <p>It didn’t say “use me less.” It said: use me differently. Stay the primary thinker. Let the model argue with you, not think for you.</p>
+            
+            <p>That advice is inspired from a talk by Advait Sarkar (Microsoft Research) that’s been stuck in my head. His point isn’t that AI is “bad”. It’s that we’re drifting into an outsourced reasoning routine—where a knowledge worker’s job quietly turns into approving machine-generated content all day.</p>
+            
+            <p>Efficient, sure.</p>
+            
+            <p>But if you’re a Staff Software Engineer, “efficiency” isn’t the high bar. Judgment is.</p>
+            
+            <p>So here’s the version that actually works in real engineering: design docs, reviews, incidents, and the weekly “wait, why are we doing this?” conversations.</p>
+            
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3003294793017551"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <h2>The Trap: It Feels Like a Normal Tuesday</h2>
+            
+            <ul>
+                <li>You open your inbox: summarize.</li>
+                <li>A doc you don’t want to read: summarize.</li>
+                <li>A Slack reply you don’t want to write: draft.</li>
+                <li>A design you’re not ready to commit to: generate options.</li>
+                <li>A Pull Request you are tired of reviewing: “anything risky here?”</li>
+                <li>A weird production blip → “Investigate this”.</li>
+            </ul>
+            
+            <p>None of these are crazy. That’s why it sticks. Your day starts to look productive while your contact with the work gets indirect.</p>
+            
+            <blockquote>
+                Sarkar has a line for it: we become middle managers for our own thoughts. Not doing the thinking, but managing the process of thinking.
+            </blockquote>
+            
+            <p>If you’ve ever stared at an AI-generated paragraph and thought, “I mean... I guess?” — you know exactly what he is talking about.</p>
+            
+            <h2>What You Lose (Quietly)</h2>
+            
+            <p>The loss isn’t obvious. It shows up as trade-offs once AI becomes your default first step:</p>
+            
+            <ul>
+                <li><strong>Fewer truly different ideas</strong>, especially across a team—everyone converges on the same “reasonable” options.</li>
+                <li><strong>Less critique</strong>, because the text arrives polished and confident.</li>
+                <li><strong>Less memory</strong>, because you didn’t write with the material (code/doc).</li>
+                <li><strong>Less reflection</strong>, because the loop becomes “approve/reject” instead of “build a model in your head”.</li>
+            </ul>
+            
+            <p>That last one matters more than it sounds. Staff-level work is basically: build models, spot risks early, and make good trade-offs under uncertainty. If your day trains you out of that muscle, it’s a slow leak.</p>
+            
+            <h2>The Fix: Stop Treating AI Like an Author</h2>
+            
+            <div class="highlight-box">
+                <strong>Best mental shift:</strong> AI should review your thinking, not replace it.
+            </div>
+            
+            <p>Not “write the design doc.” Instead: “Here’s my design. Tell me where it breaks.”</p>
+            
+            <p>Not “diagnose the incident.” Instead: “Here are the symptoms and signals. Give me hypotheses and what would confirm each.”</p>
+            
+            <p>That’s the difference between outsourcing and leverage.</p>
+            
+            <h2>My Default Loop: Think → Commit → Consult</h2>
+            
+            <p>This is the pattern I keep coming back to. It’s boring, which is part of why it works.</p>
+            
+            <h3>1) Think (10–20 minutes, solo)</h3>
+            
+            <p>Before I ask AI anything substantive, I force myself to write a scrappy first pass:</p>
+            
+            <ul>
+                <li>what I think we should do</li>
+                <li>why (2–3 reasons)</li>
+                <li>what I’m unsure about</li>
+                <li>what would change my mind</li>
+            </ul>
+            
+            <p>It doesn’t have to be pretty. It just has to be mine.</p>
+            
+            <h3>2) Commit (one small artifact)</h3>
+            
+            <p>I turn that into something reviewable: a short design note, ADR, PR comment, incident update—whatever fits.</p>
+            
+            <p>For engineering decisions, I try to include these blocks (you can create your design doc template around this):</p>
+            
+            <ul>
+                <li>goal / non-goals</li>
+                <li>constraints (latency, cost, security, team bandwidth, timelines)</li>
+                <li>options + trade-offs</li>
+                <li>assumptions / invariants (“what must stay true”)</li>
+                <li>risks + mitigations</li>
+                <li>rollout + rollback</li>
+                <li>how we’ll know it’s working (signals)</li>
+            </ul>
+            
+            <p>This is the part people skip because it feels slow. It also prevents the “we shipped it, but nobody can explain it” problem later.</p>
+            
+            <h3>3) Consult (AI + humans)</h3>
+            
+            <p>Now I bring in AI—specifically to attack the artifact.</p>
+            
+            <p>And yes, I still ask humans (peers). Especially for security/data integrity/migrations that can ruin a quarter. AI doesn’t get to be the only reviewer in the room.</p>
+            
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3003294793017551"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <h2>“Should I Create AI Assistants/Agents for This?”</h2>
+            
+            <p>Yes—but don’t build a giant autopilot system that does things end-to-end. That’s how you get output without ownership.</p>
+            
+            <p>Instead, create a small “review board”. Think of them like recurring roles you’d want in a design review, but available anytime.</p>
+            
+            <p>The set that keeps paying off:</p>
+            
+            <ul>
+                <li><strong>Red Team:</strong> edge cases, hidden assumptions, failure modes</li>
+                <li><strong>SRE brain:</strong> operability, observability, rollout/rollback, SLO risk</li>
+                <li><strong>Security brain:</strong> threat model, auth, data exposure, abuse cases</li>
+                <li><strong>Perf/Cost brain:</strong> hot paths, scaling cliffs, complexity creep</li>
+                <li><strong>Test brain:</strong> invariants, minimal test plan, regression traps</li>
+            </ul>
+            
+            <p><strong>Key detail:</strong> they should push back. If they only agree with you, you basically built a yes-man.</p>
+            
+            <h2>Where This Helps in Day-to-Day Staff Work</h2>
+            
+            <h3>Design docs (where mistakes get expensive)</h3>
+            
+            <p>Before I ask for feedback, I write two lists:</p>
+            
+            <ul>
+                <li>“What must always be true?”</li>
+                <li>“What would be catastrophic if wrong?”</li>
+            </ul>
+            
+            <p>Then I ask AI questions like:</p>
+            
+            <ul>
+                <li>“List the assumptions here. Rank them by fragility.”</li>
+                <li>“How could this cause silent data loss?”</li>
+                <li>“What breaks in 6 months when traffic doubles and the team changes?”</li>
+            </ul>
+            
+            <p>This isn’t about paranoia. It’s about catching the boring disasters early.</p>
+            
+            <h3>PR reviews (where humans miss the same things repeatedly)</h3>
+            
+            <p>I review first. Then I ask AI to hunt for a few specific categories humans are bad at when tired:</p>
+            
+            <ul>
+                <li>concurrency/order</li>
+                <li>retries/partial failures</li>
+                <li>weird inputs/boundaries</li>
+                <li>perf cliffs</li>
+                <li>migration hazards</li>
+            </ul>
+            
+            <p>Sometimes it finds nothing. That’s fine. The habit is what matters.</p>
+            
+            <h3>Incidents (where speed matters, but certainty doesn’t exist)</h3>
+            
+            <p>I use AI for hypothesis generation, not conclusions:</p>
+            
+            <ul>
+                <li>“Given these symptoms and metrics, propose 5 hypotheses and what signal would confirm each.”</li>
+                <li>“What mitigation reduces blast radius in 10 minutes?”</li>
+            </ul>
+            
+            <p>If an AI can’t point to signals (logs/metrics/traces), it’s storytelling. In an incident, storytelling is how you lose hours.</p>
+            
+            <h3>Strategy (where the clean narrative is often wrong)</h3>
+            
+            <p>I’ll ask it to argue against me:</p>
+            
+            <ul>
+                <li>“Debate this plan like a skeptical principal engineer.”</li>
+                <li>“What’s the simplest alternative that hits 80% of the outcome?”</li>
+            </ul>
+            
+            <p>You don’t need the model to be right. You need it to force you to defend (or refine) the reasoning.</p>
+            
+            <h2>A Small Python “Review Board” Runner (Optional, but Useful)</h2>
+            
+            <p>This keeps the workflow repeatable. No autonomy, no magic. Just structured dissent on demand.</p>
+            
+            <pre><code>from dataclasses import dataclass
+from typing import List, Dict
+
+@dataclass
+class Persona:
+    name: str
+    system: str
+
+PERSONAS = [
+    Persona("RedTeam", "You are a skeptical principal engineer. Find flaws, edge cases, hidden assumptions."),
+    Persona("SRE", "You are an SRE. Focus on operability: SLOs, observability, rollout/rollback, failure modes."),
+    Persona("Security", "You are a security engineer. Threat model, data exposure, abuse cases, authz/authn."),
+    Persona("PerfCost", "You focus on performance and cost. Identify hot paths, scaling risks, caching, complexity."),
+    Persona("TestStrategy", "You focus on tests and invariants. Propose a minimal test plan that catches regressions."),
+]
+
+def review_pack(context: str, draft: str) -> List[Dict[str, str]]:
+    """
+    Replace call_llm(...) with your LLM API client.
+    Keep this review-only: AI critiques your artifact; it does not write it from scratch.
+    """
+    reviews = []
+    for p in PERSONAS:
+        prompt = f"""
+Context:
+{context}
+
+My draft:
+{draft}
+
+Instructions:
+1) Ask up to 5 clarifying questions first (if needed).
+2) Then critique under:
+   Correctness, Edge Cases, Operability, Security, Performance/Cost, Simplicity, Testing.
+3) Provide 3 concrete recommended changes to the draft.
+"""
+        # resp = call_llm(system=p.system, user=prompt)
+        resp = "&lt;LLM_RESPONSE&gt;"
+        reviews.append({"persona": p.name, "response": resp})
+    return reviews</code></pre>
+            
+            <h2>The Guardrails I Try to Follow (Because I Don’t Always)</h2>
+            
+            <p>These sound obvious. They’re also the first things to slip when you’re busy.</p>
+            
+            <ul>
+                <li>Draft my view first (even if it’s rough).</li>
+                <li>AI critiques before it proposes.</li>
+                <li>Any factual claim needs a verification hook (metric/log/test/source).</li>
+                <li>Rollback isn’t optional for real releases.</li>
+                <li>High-stakes calls still get real humans involved.</li>
+            </ul>
+            
+            <h2>Closing Thought</h2>
+            
+            <div class="conclusion">
+                <p>AI can absolutely make you faster. That’s real value.</p>
+                
+                <p>But if it trains you to skip framing, avoid skepticism, and accept polished text you didn’t truly earn, you’ll feel the cost later—usually at the worst time.</p>
+                
+                <p><strong>The question I keep coming back to is simple:</strong></p>
+                
+                <p><strong>Am I using this to get an answer… or to become harder to fool?</strong></p>
+            </div>
+            
+            <div style="margin-top: 50px; padding-top: 30px; border-top: 2px solid #e0e0e0;">
+                <h3 style="color: #333333;">Further Reading</h3>
+                <ul>
+                    <li><a href="https://www.microsoft.com/en-us/research/articles/rethinking-ai-in-knowledge-work-from-assistant-to-tool-for-thought/" target="_blank" rel="noopener">Microsoft Research: Rethinking AI in Knowledge Work (Assistant → Tool for Thought)</a></li>
+                    <li><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2025/11/TEDAI_2025_AI_as_Tool_for_Thought_V1.pdf" target="_blank" rel="noopener">Advait Sarkar: AI as a Tool for Thought (slides/PDF)</a></li>
+                    <li><a href="https://podscripts.co/podcasts/ted-talks-daily/how-to-stop-ai-from-killing-your-critical-thinking-advait-sarkar" target="_blank" rel="noopener">“How to stop AI from killing your critical thinking” (transcript)</a></li>
+                </ul>
+            </div>
+        </article>
+    </div>
+    
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3003294793017551"
+            crossorigin="anonymous"></script>
+</body>
+</html>
+
